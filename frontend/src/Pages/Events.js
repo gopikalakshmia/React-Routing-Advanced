@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import {  useLoaderData,json} from "react-router-dom";
 import EventsList from "../components/EventsList";
 function Events() {
   const data = useLoaderData();
@@ -16,6 +16,7 @@ export const dataEventLoader = async () => {
   //const data=await response.json();
   //console.log(data.events);
   if (!response.ok) {
+  //   return json({messgae:"erroe"},{status:500})
   } else return response;
 };
 

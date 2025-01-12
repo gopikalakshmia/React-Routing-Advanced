@@ -22,8 +22,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./Pages/Home";
 import Events, { dataEventLoader } from "./Pages/Events";
-import EventDetails from "./Pages/EventDetails";
-import NewEvent from "./Pages/NewEvent";
+import EventDetails, { eventDataLodaerById } from "./Pages/EventDetails";
+import NewEvent, { newFormaction } from "./Pages/NewEvent";
 import EditEvent from "./Pages/EditEvent";
 
 import EventFom from "./components/EventForm";
@@ -36,19 +36,28 @@ function App() {
     {
       path: "/",
       element: <MainLayout />,
-      errorElement:<Error/>,
+      errorElement: <Error />,
       children: [
         { path: "", element: <Home /> },
         {
           path: "events",
           element: <EventLayout />,
           children: [
-            { path: "", element: <Events /> ,loader:dataEventLoader},
-            { path: ":id", element: <EventDetails /> },
-            { path: "new", element: <NewEvent /> },
-            { path: ":id/edit", element: <EditEvent /> },
+            { path: "", element: <Events />, loader: dataEventLoader },
+            {
+              path: ":id",
+            
+              children: [
+                { path: "", element: <EventDetails /> , loader: eventDataLodaerById},
+                { path: "edit", element: <EditEvent /> ,loader: eventDataLodaerById},
+                
+              ],
+            },
+            { path: "new", element: <NewEvent />,action:newFormaction },
+            
           ],
         },
+        
       ],
     },
   ]);
