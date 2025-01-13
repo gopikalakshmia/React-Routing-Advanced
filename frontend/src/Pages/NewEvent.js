@@ -30,5 +30,5 @@ export const newFormaction = async ({ request, params }) => {
   console.log(response);
   if (!response.ok) {
     throw { message: "unable to post element" };
-  } else return redirect("/");
+  } else return redirect("/events");
 };

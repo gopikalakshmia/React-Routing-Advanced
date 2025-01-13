@@ -22,7 +22,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./Pages/Home";
 import Events, { dataEventLoader } from "./Pages/Events";
-import EventDetails, { eventDataLodaerById } from "./Pages/EventDetails";
+import EventDetails, { eventDataLodaerById ,deleteEventAction} from "./Pages/EventDetails";
 import NewEvent, { newFormaction } from "./Pages/NewEvent";
 import EditEvent from "./Pages/EditEvent";
 
@@ -43,21 +43,29 @@ function App() {
           path: "events",
           element: <EventLayout />,
           children: [
-            { path: "", element: <Events />, loader: dataEventLoader },
+            {index:true, element: <Events />, loader: dataEventLoader },
             {
               path: ":id",
-            
+              action: deleteEventAction,
+              loader: eventDataLodaerById,
               children: [
-                { path: "", element: <EventDetails /> , loader: eventDataLodaerById},
-                { path: "edit", element: <EditEvent /> ,loader: eventDataLodaerById},
-                
+                {
+                  path: "",
+                  element: <EventDetails />,
+                  loader: eventDataLodaerById,
+                 
+                },
+                {
+                  path: "edit",
+                  element: <EditEvent />,
+                  loader: eventDataLodaerById,
+                 
+                },
               ],
             },
-            { path: "new", element: <NewEvent />,action:newFormaction },
-            
+            { path: "new", element: <NewEvent />, action: newFormaction },
           ],
         },
-        
       ],
     },
   ]);

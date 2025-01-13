@@ -1,4 +1,4 @@
-import { useLoaderData, useRouteLoaderData } from "react-router-dom";
+import { useLoaderData, useRouteLoaderData,redirect } from "react-router-dom";
 import EventForm from "../components/EventForm";
 
 function EditEvent() {
@@ -7,3 +7,4 @@ function EditEvent() {
 }
 
 export default EditEvent;
+
